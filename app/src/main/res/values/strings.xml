@@ -4,4 +4,8 @@
     <string name="menu_buy">Comprar</string>
     <string name="menu_vender">Vender</string>
     <string name="action_perfil">Perfil</string>
+    <string name="register_fullname">Nome completo</string>
+    <string name="register_cpf">CPF</string>
+    <string name="register_confirm_button">Confirmar Registro</string>
+    <string name="register_confirm_password">Confirmar senha</string>
 </resources>
