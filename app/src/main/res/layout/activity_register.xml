@@ -15,19 +15,12 @@
                 android:orientation="vertical">
 
             <!--SET LOGO IMAGE HERE -->
-            <ImageView
-                    android:layout_width="194dp"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/logo"
-                    android:id="@+id/imageLogo"
-                    android:layout_weight="1"
-                    android:layout_gravity="center"
-                    android:layout_margin="40dp"/>
 
             <!-- FULLNAME INPUT FIELD -->
             <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="50dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
@@ -53,7 +46,8 @@
                         android:id="@+id/editTextCpf"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="text"
+                        android:inputType="phone"
+                        android:maxLength="14"
                         android:hint="@string/register_cpf"/>
             </android.support.design.widget.TextInputLayout>
 
@@ -118,7 +112,7 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="20dp"
-                    android:background="@color/colorPrimary"
+                    android:background="@drawable/ripple_effect"
                     android:textColor="#fff"
                     android:text="@string/register_confirm_button"/>
 
