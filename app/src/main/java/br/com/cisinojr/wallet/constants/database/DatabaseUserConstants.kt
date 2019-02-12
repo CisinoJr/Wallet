@@ -2,9 +2,11 @@ package br.com.cisinojr.wallet.constants.database
 
 class DatabaseUserConstants {
 
-    val TABLE_NAME = "user"
+    object USER {
+        val TABLE_NAME = "user"
+    }
 
-    companion object COLUMNS {
+    object COLUMNS {
         val ID = "id"
         val FULLNAME = "fullname"
         val EMAIL = "email"
