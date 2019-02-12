@@ -21,19 +21,21 @@ class UserRepository private constructor(context: Context) : GenericCrudReposito
     }
 
     override fun update(content: User): Int {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        // TODO: Implement update logic
+        return 0
     }
 
-    override fun find(id: Int): User {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun find(id: Int): User? {
+        // TODO: Implement find, by id
+        return null
     }
 
     override fun findAll(searchContent: User?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        // TODO: Implement findAll, return a list of users
     }
 
     override fun delete(id: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        // TODO: Implement delete logic
     }
 
     companion object {
