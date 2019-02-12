@@ -58,6 +58,8 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
     private fun register() {
         if (!CpfValidator.myValidateCPF(editTextCpf.text.toString())) {
             showSnackFeedback("CPF inválido", false, editTextCpf)
+        } else {
+
         }
     }
 

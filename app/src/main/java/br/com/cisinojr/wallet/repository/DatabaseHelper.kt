@@ -14,7 +14,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
 
     private val createUserTable = """CREATE TABLE ${DatabaseUserConstants.USER.TABLE_NAME} (
         ${DatabaseUserConstants.COLUMNS.ID} INTEGER PRIMARY KEY AUTOINCREMENT,
-        ${DatabaseUserConstants.COLUMNS.FULLNAME} TEXT,
+        ${DatabaseUserConstants.COLUMNS.FULL_NAME} TEXT,
         ${DatabaseUserConstants.COLUMNS.EMAIL} TEXT,
         ${DatabaseUserConstants.COLUMNS.CPF} TEXT,
         ${DatabaseUserConstants.COLUMNS.PASSWORD} TEXT
