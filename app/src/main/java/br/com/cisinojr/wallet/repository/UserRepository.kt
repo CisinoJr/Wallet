@@ -7,9 +7,9 @@ import br.com.cisinojr.wallet.domain.User
 
 class UserRepository private constructor(context: Context) : GenericCrudRepository<User> {
 
-    private var databaseHelper : DatabaseHelper = DatabaseHelper(context)
+    private var databaseHelper: DatabaseHelper = DatabaseHelper(context)
 
-    override fun save(content: User) : Int {
+    override fun save(content: User): Int {
         val db = databaseHelper.writableDatabase
         val insertValues = ContentValues()
         insertValues.put(DatabaseUserConstants.COLUMNS.FULL_NAME, content.fullName)
@@ -20,15 +20,15 @@ class UserRepository private constructor(context: Context) : GenericCrudReposito
         return db.insert(DatabaseUserConstants.USER.TABLE_NAME, null, insertValues).toInt()
     }
 
-    override fun update(content: User) {
+    override fun update(content: User): Int {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun find(id: Int) {
+    override fun find(id: Int): User {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun findAll() {
+    override fun findAll(searchContent: User?) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
