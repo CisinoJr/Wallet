@@ -1,13 +1,12 @@
 package br.com.cisinojr.wallet.controller
 
 import android.os.Bundle
-import android.support.design.widget.Snackbar
-import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.Toast
 import br.com.cisinojr.wallet.R
 import br.com.cisinojr.wallet.controller.util.CpfMask
+import br.com.cisinojr.wallet.controller.util.ValidationUtil
 import br.com.cisinojr.wallet.domain.User
 import br.com.cisinojr.wallet.exceptions.BusinessException
 import br.com.cisinojr.wallet.exceptions.ValidationException
@@ -18,6 +17,7 @@ import kotlinx.android.synthetic.main.activity_register.*
 class RegisterActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var userService: UserService
+    private lateinit var validationUtil: ValidationUtil
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +25,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
 
         // Initiate UserService
         userService = UserServiceImpl(this)
+        validationUtil = ValidationUtil.getInstance()
 
         // initializing the listeners
         initListeners()
@@ -83,33 +84,19 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
 
             val result: Int? = userService.save(user)
 
-            if (result != null) {
+            if (result != null) { // TODO: implementar redirecionamento para main activity
                 Toast.makeText(this, "Cadastro realizado com sucesso. Realizando login...", Toast.LENGTH_LONG)
                     .show()
             }
 
         } catch (validationException: ValidationException) {
-            showSnackFeedback(validationException.message, false, editTextFullname)
+            validationUtil.showSnackFeedback(this, validationException.message, false, editTextFullname)
         } catch (businessException: BusinessException) {
-            showSnackFeedback(businessException.message, false, editTextFullname)
+            validationUtil.showSnackFeedback(this, businessException.message, false, editTextFullname)
         }
     }
 
 
-    /**
-     * Show validation error messages
-     */
-    fun showSnackFeedback(message: String?, isValid: Boolean, view: View) {
-        val snackbar: Snackbar = Snackbar.make(view, message!!, Snackbar.LENGTH_SHORT)
-        val v: View = snackbar.view
 
-        if (!isValid) {
-            v.setBackgroundColor(ContextCompat.getColor(this, android.R.color.holo_red_dark))
-        } else {
-            v.setBackgroundColor(ContextCompat.getColor(this, android.R.color.holo_green_dark))
-        }
-
-        snackbar.show()
-    }
 
 }
