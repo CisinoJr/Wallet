@@ -12,6 +12,10 @@ class DatabaseUserConstants {
         const val EMAIL = "email"
         const val CPF = "cpf"
         const val PASSWORD = "password"
+
+        fun getColumns(): Array<String> {
+            return arrayOf(ID, FULL_NAME, EMAIL, CPF, PASSWORD)
+        }
     }
 
 }
