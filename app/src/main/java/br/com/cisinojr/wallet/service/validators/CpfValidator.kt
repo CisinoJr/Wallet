@@ -1,4 +1,4 @@
-package br.com.cisinojr.wallet.controller.util
+package br.com.cisinojr.wallet.service.validators
 
 class CpfValidator {
     companion object {

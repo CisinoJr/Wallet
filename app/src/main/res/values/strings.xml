@@ -8,4 +8,5 @@
     <string name="register_cpf">000.000.000-00</string>
     <string name="register_confirm_button">Confirmar Registro</string>
     <string name="register_confirm_password">Confirmar senha</string>
+    <string name="register_email">Email</string>
 </resources>
