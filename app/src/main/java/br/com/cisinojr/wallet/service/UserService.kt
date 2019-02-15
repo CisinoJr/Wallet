@@ -39,7 +39,26 @@ interface UserService {
      */
     fun delete(id: Int)
 
-
+    /**
+     * Check if user information is valid
+     *
+     * @param user Entity to validate
+     */
     fun validateUser(user: User)
+
+    /**
+     * Check if the input login information is valid
+     *
+     * @param email User's email
+     * @param password User's password
+     */
+    fun validateUserCredentials(email: String, password: String): Boolean
+
+    /**
+     * Check if user information exists into shared preferences and automatically log-in user
+     *
+     * return true if user information exists
+     */
+    fun isUserLoggedIn(): Boolean
 
 }

@@ -2,12 +2,14 @@ package br.com.cisinojr.wallet.service
 
 import android.content.Context
 import br.com.cisinojr.wallet.R
+import br.com.cisinojr.wallet.constants.tasks.TaskConstants
 import br.com.cisinojr.wallet.service.validators.CpfValidator
 import br.com.cisinojr.wallet.domain.User
 import br.com.cisinojr.wallet.exceptions.BusinessException
 import br.com.cisinojr.wallet.exceptions.RepositoryException
 import br.com.cisinojr.wallet.exceptions.ValidationException
 import br.com.cisinojr.wallet.repository.UserRepository
+import br.com.cisinojr.wallet.service.util.SecurityPreferences
 
 /**
  *
@@ -17,6 +19,7 @@ import br.com.cisinojr.wallet.repository.UserRepository
 class UserServiceImpl(val context: Context) : UserService {
 
     private val userRepository: UserRepository = UserRepository.getInstance(context)
+    private val securityPreferences: SecurityPreferences = SecurityPreferences(context)
 
     /**
      * Save the object into database
@@ -28,10 +31,14 @@ class UserServiceImpl(val context: Context) : UserService {
         try {
 
             if (validateEmailBeforeRegisterUser(user.email!!)) {
-                throw ValidationException("Email já está em uso. Favor tente com outro!")
+                throw ValidationException(context.getString(R.string.register_validation_email_exists))
             }
 
             result = userRepository.save(user)
+
+            // store user information into shared preferences
+            storeUserInformation(user)
+
         } catch (repositoryException: RepositoryException) {
             throw BusinessException(context.getString(R.string.validation_register_error))
         }
@@ -105,9 +112,11 @@ class UserServiceImpl(val context: Context) : UserService {
      * @param email User's email
      * @param password User's password
      */
-    override fun validateUserCredentials(email: String, password: String): User? {
-        val user: User?
+    override fun validateUserCredentials(email: String, password: String): Boolean {
+        val result: Boolean
+
         try {
+
             if (email.isBlank() || email.isEmpty()) {
                 throw ValidationException(context.getString(R.string.validation_login_mail))
             }
@@ -116,19 +125,46 @@ class UserServiceImpl(val context: Context) : UserService {
                 throw ValidationException(context.getString(R.string.validation_login_password))
             }
 
-            user = userRepository.getUserCredentials(email, password)
+            val user: User? = userRepository.getUserCredentials(email, password)
 
-            if (user == null) {
+            if (user != null) {
+                // store user information into shared preferences
+                storeUserInformation(user)
+
+                result = true
+            } else {
                 throw ValidationException(context.getString(R.string.validation_login_user_info_exists))
             }
         } catch (repositoryException: RepositoryException) {
             throw BusinessException(context.getString(R.string.validation_login_error))
         }
 
-        return user
+        return result
     }
 
-    fun validateEmailBeforeRegisterUser(email: String): Boolean {
+    /**
+     * Check if user information exists into shared preferences and automatically log-in user
+     *
+     * @param user User information
+     * return true if user information exists
+     */
+    override fun isUserLoggedIn(): Boolean {
+        return try {
+            val userId = securityPreferences.getStoredString(TaskConstants.KEY.USER_ID)
+
+            var userFromDatabase: User? = null
+
+            if (userId != "") {
+                userFromDatabase = userRepository.find(userId.toInt())
+            }
+
+            userFromDatabase != null
+        } catch (exception: Exception) {
+            throw BusinessException(context.getString(R.string.validation_login_error))
+        }
+    }
+
+    private fun validateEmailBeforeRegisterUser(email: String): Boolean {
         val emailExists: Boolean
 
         try {
@@ -138,5 +174,13 @@ class UserServiceImpl(val context: Context) : UserService {
         }
 
         return emailExists
+    }
+
+    private fun storeUserInformation(user: User) {
+        with(securityPreferences) {
+            storeString(TaskConstants.KEY.USER_ID, user.id.toString())
+            storeString(TaskConstants.KEY.USER_FULLNAME, user.fullName!!)
+            storeString(TaskConstants.KEY.USER_EMAIL, user.email!!)
+        }
     }
 }
