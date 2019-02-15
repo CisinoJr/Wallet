@@ -1,6 +1,7 @@
 package br.com.cisinojr.wallet.service
 
 import android.content.Context
+import br.com.cisinojr.wallet.R
 import br.com.cisinojr.wallet.service.validators.CpfValidator
 import br.com.cisinojr.wallet.domain.User
 import br.com.cisinojr.wallet.exceptions.BusinessException
@@ -26,12 +27,13 @@ class UserServiceImpl(val context: Context) : UserService {
         val result: Int?
         try {
 
-            // TODO: Implementar validação de email (verificar se email ja está cadasstrado)
-            // TODO: Validar se já existe usuário com o cpf digitado
+            if (validateEmailBeforeRegisterUser(user.email!!)) {
+                throw ValidationException("Email já está em uso. Favor tente com outro!")
+            }
 
             result = userRepository.save(user)
-        } catch (businessException: RepositoryException) {
-            throw BusinessException("Ocorreu um erro ao registrar. Tente novamente!")
+        } catch (repositoryException: RepositoryException) {
+            throw BusinessException(context.getString(R.string.validation_register_error))
         }
 
         return result
@@ -73,21 +75,68 @@ class UserServiceImpl(val context: Context) : UserService {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
+    /**
+     * Check if user information is valid
+     *
+     * @param user Entity to validate
+     */
     override fun validateUser(user: User) {
-        if (!CpfValidator.myValidateCPF(user.cpf!!)) {
-            throw ValidationException("CPF inválido")
-        }
 
         if (user.fullName.isNullOrBlank() || user.fullName.isNullOrEmpty()) {
-            throw ValidationException("Favor informar nome completo")
+            throw ValidationException(context.getString(R.string.validation_fullName))
+        }
+
+        if (!CpfValidator.myValidateCPF(user.cpf!!)) {
+            throw ValidationException(context.getString(R.string.validation_cpf))
         }
 
         if (user.email.isNullOrBlank() || user.email.isNullOrEmpty()) {
-            throw ValidationException("Favor informar e-mail")
+            throw ValidationException(context.getString(R.string.validation_email))
         }
 
         if (user.password.isNullOrBlank() || user.email.isNullOrEmpty()) {
-            throw ValidationException("Favor informar uma senha")
+            throw ValidationException(context.getString(R.string.validation_password))
         }
+    }
+
+    /**
+     * Check if the input login information is valid
+     *
+     * @param email User's email
+     * @param password User's password
+     */
+    override fun validateUserCredentials(email: String, password: String): User? {
+        val user: User?
+        try {
+            if (email.isBlank() || email.isEmpty()) {
+                throw ValidationException(context.getString(R.string.validation_login_mail))
+            }
+
+            if (password.isBlank() || password.isEmpty()) {
+                throw ValidationException(context.getString(R.string.validation_login_password))
+            }
+
+            user = userRepository.getUserCredentials(email, password)
+
+            if (user == null) {
+                throw ValidationException(context.getString(R.string.validation_login_user_info_exists))
+            }
+        } catch (repositoryException: RepositoryException) {
+            throw BusinessException(context.getString(R.string.validation_login_error))
+        }
+
+        return user
+    }
+
+    fun validateEmailBeforeRegisterUser(email: String): Boolean {
+        val emailExists: Boolean
+
+        try {
+            emailExists = userRepository.emailExists(email)
+        } catch (repositoryException: RepositoryException) {
+            throw BusinessException(context.getString(R.string.validation_login_error))
+        }
+
+        return emailExists
     }
 }

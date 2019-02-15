@@ -50,7 +50,6 @@ class UserRepository private constructor(context: Context) : GenericCrudReposito
      * @return the entity
      */
     override fun find(id: Int): User? {
-        // TODO: Implement find, by id
         val user: User?
 
         try {
@@ -59,6 +58,86 @@ class UserRepository private constructor(context: Context) : GenericCrudReposito
             val columns = DatabaseUserConstants.COLUMNS.getColumns() // Array of columns
             val selection = "${DatabaseUserConstants.COLUMNS.ID} = ?" // Filter user by id: where id = :id
             val selectionArgs = arrayOf(id.toString()) // Filter arguments
+
+            // Execute query
+            cursor = database.query(
+                DatabaseUserConstants.USER.TABLE_NAME,
+                columns,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                null
+            )
+
+            // create user object
+            user = createUser(cursor)
+
+        } catch (exception: SQLiteException) {
+            throw RepositoryException("Ocorreu um erro ao executar query")
+        } catch (exception: Exception) {
+            throw RepositoryException("Ocorreu um erro ao recuperar dados do usuário")
+        }
+
+        return user
+    }
+
+    /**
+     * Check with e-mail exists before creating new user
+     *
+     * @param email Typed email
+     * return true if email was found
+     */
+    fun emailExists(email: String): Boolean {
+        val emailExists: Boolean
+
+        try {
+            val cursor: Cursor
+            val database = databaseHelper.readableDatabase
+            val columns = DatabaseUserConstants.COLUMNS.getColumns() // Array of columns
+            val selection = "${DatabaseUserConstants.COLUMNS.EMAIL} = ?"
+            val selectionArgs = arrayOf(email) // Filter arguments
+
+            // Execute query
+            cursor = database.query(
+                DatabaseUserConstants.USER.TABLE_NAME,
+                columns,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                null
+            )
+
+            emailExists = cursor.count > 0
+
+            cursor.close()
+        } catch (exception: SQLiteException) {
+            throw RepositoryException("Ocorreu um erro ao executar query")
+        } catch (exception: Exception) {
+            throw RepositoryException("Ocorreu um erro ao recuperar dados do usuário")
+        }
+
+        return emailExists
+    }
+
+    /**
+     * Find user by ID
+     *
+     * @param id The entity ID
+     * @return the entity
+     */
+    fun getUserCredentials(email: String, password: String): User? {
+        // TODO: Implement find, by id
+        val user: User?
+
+        try {
+            val cursor: Cursor
+            val database = databaseHelper.readableDatabase
+            val columns = DatabaseUserConstants.COLUMNS.getColumns() // Array of columns
+            val selection = """${DatabaseUserConstants.COLUMNS.EMAIL} = ?
+                AND ${DatabaseUserConstants.COLUMNS.PASSWORD} = ?""" // Filter user by id: where id = :id
+            val selectionArgs = arrayOf(email, password) // Filter arguments
 
             // Execute query
             cursor = database.query(
@@ -97,7 +176,7 @@ class UserRepository private constructor(context: Context) : GenericCrudReposito
      * @param cursor Cursor
      */
     private fun createUser(cursor: Cursor): User? {
-        lateinit var user: User
+        var user: User? = null
 
         try {
             if (cursor.count > 0) {
