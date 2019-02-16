@@ -164,6 +164,24 @@ class UserServiceImpl(val context: Context) : UserService {
         }
     }
 
+    /**
+     * Log out user from the app
+     *
+     */
+    override fun logoutUser() {
+        try {
+            removeUserInformation()
+        } catch (exception: Exception) {
+            throw BusinessException(context.getString(R.string.validation_logout_error))
+        }
+    }
+
+    /**
+     * Check if email is already in use before register new user
+     *
+     * @param email The email to validate
+     * @return true if exists a user with the email
+     */
     private fun validateEmailBeforeRegisterUser(email: String): Boolean {
         val emailExists: Boolean
 
@@ -176,11 +194,27 @@ class UserServiceImpl(val context: Context) : UserService {
         return emailExists
     }
 
+    /**
+     * Stores user information into SharedPreferences to hold user logged in
+     * @param user User
+     */
     private fun storeUserInformation(user: User) {
         with(securityPreferences) {
             storeString(TaskConstants.KEY.USER_ID, user.id.toString())
             storeString(TaskConstants.KEY.USER_FULLNAME, user.fullName!!)
             storeString(TaskConstants.KEY.USER_EMAIL, user.email!!)
+        }
+    }
+
+    /**
+     * Remove user information from SharedPreferences to logout
+     *
+     */
+    private fun removeUserInformation() {
+        with(securityPreferences) {
+            removeStoredString(TaskConstants.KEY.USER_ID)
+            removeStoredString(TaskConstants.KEY.USER_FULLNAME)
+            removeStoredString(TaskConstants.KEY.USER_EMAIL)
         }
     }
 }

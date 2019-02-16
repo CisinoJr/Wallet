@@ -61,4 +61,9 @@ interface UserService {
      */
     fun isUserLoggedIn(): Boolean
 
+    /**
+     * Log out user from the app
+     *
+     */
+    fun logoutUser()
 }
