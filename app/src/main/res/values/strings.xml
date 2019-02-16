@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Wallet</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_buy">Comprar</string>
+    <string name="menu_vender">Vender</string>
+    <string name="action_perfil">Perfil</string>
 </resources>
