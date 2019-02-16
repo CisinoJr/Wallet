@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_home"
+        android:title="@string/menu_home"
+        android:enabled="true"
+        android:icon="@drawable/ic_home_white_24dp"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/action_buy"
+        android:title="@string/menu_buy"
+        android:enabled="true"
+        android:icon="@drawable/ic_exchange_money_for_cripto_currency"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/action_sell"
+        android:title="@string/menu_vender"
+        android:enabled="true"
+        android:icon="@drawable/ic_exchange_criptocurrency_for_money"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/action_profile"
+        android:title="@string/action_perfil"
+        android:enabled="true"
+        android:icon="@drawable/ic_account_circle_white_24dp"
+        app:showAsAction="ifRoom"/>
+
+</menu>
