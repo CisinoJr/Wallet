@@ -1,7 +1,30 @@
 <resources>
     <string name="app_name">Wallet</string>
+    <string name="login">Login</string>
+    <string name="password">Senha</string>
+    <string name="register_text">Ainda não possui conta? Crie uma agora!</string>
     <string name="menu_home">Home</string>
     <string name="menu_buy">Comprar</string>
     <string name="menu_vender">Vender</string>
     <string name="action_perfil">Perfil</string>
+    <string name="register_fullname">Nome completo</string>
+    <string name="register_cpf">000.000.000–00</string>
+    <string name="register_confirm_button">Confirmar Registro</string>
+    <string name="register_confirm_password">Confirmar senha</string>
+    <string name="email">Email</string>
+    <string name="register_email">Email</string>
+    <string name="validation_cpf">CPF inválido</string>
+    <string name="validation_fullName">Favor informar nome completo</string>
+    <string name="validation_email">Favor informar e-mail</string>
+    <string name="validation_password">Favor informar uma senha</string>
+    <string name="validation_register_error">Ocorreu um erro ao registrar. Tente novamente!</string>
+    <string name="validation_login_mail">Favor informar e-mail</string>
+    <string name="validation_login_password">Favor informar a senha</string>
+    <string name="validation_login_user_info_exists">Usuário ou senha incorretos informar e-mail</string>
+    <string name="validation_login_error">Ocorreu um erro ao logar. Tente novamente!</string>
+    <string name="register_validation_email_exists">Email já está em uso. Favor tente novamente com outro email!</string>
+    <string name="validation_logout_error">Ocorreu um erro ao realizar o Logout!</string>
+    <string name="button_update_user">Salvar alterações</string>
+    <string name="error_finding_user_info">Erro ao recuperar informações</string>
+    <string name="action_logout">Sair</string>
 </resources>
