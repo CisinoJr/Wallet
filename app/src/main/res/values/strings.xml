@@ -24,4 +24,7 @@
     <string name="validation_login_error">Ocorreu um erro ao logar. Tente novamente!</string>
     <string name="register_validation_email_exists">Email já está em uso. Favor tente novamente com outro email!</string>
     <string name="validation_logout_error">Ocorreu um erro ao realizar o Logout!</string>
+    <string name="button_update_user">Salvar alterações</string>
+    <string name="error_finding_user_info">Erro ao recuperar informações</string>
+    <string name="action_logout">Sair</string>
 </resources>

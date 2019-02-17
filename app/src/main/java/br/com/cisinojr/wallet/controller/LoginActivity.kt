@@ -4,10 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
-import br.com.cisinojr.wallet.MainActivity
 import br.com.cisinojr.wallet.R
 import br.com.cisinojr.wallet.controller.util.ValidationUtil
-import br.com.cisinojr.wallet.domain.User
 import br.com.cisinojr.wallet.exceptions.BusinessException
 import br.com.cisinojr.wallet.exceptions.ValidationException
 import br.com.cisinojr.wallet.service.UserService

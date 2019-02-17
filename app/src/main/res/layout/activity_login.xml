@@ -15,7 +15,6 @@
                 android:orientation="vertical">
 
             <!--SET LOGO IMAGE HERE -->
-
             <ImageView
                     android:layout_width="194dp"
                     android:layout_height="wrap_content"

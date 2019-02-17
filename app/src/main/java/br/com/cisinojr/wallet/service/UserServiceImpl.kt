@@ -27,14 +27,14 @@ class UserServiceImpl(val context: Context) : UserService {
      * @param user Entity to save
      */
     override fun save(user: User): Int? {
-        val result: Int?
+        val userId: Int?
         try {
 
             if (validateEmailBeforeRegisterUser(user.email!!)) {
                 throw ValidationException(context.getString(R.string.register_validation_email_exists))
             }
 
-            result = userRepository.save(user)
+            userId = userRepository.save(user)
 
             // store user information into shared preferences
             storeUserInformation(user)
@@ -43,25 +43,41 @@ class UserServiceImpl(val context: Context) : UserService {
             throw BusinessException(context.getString(R.string.validation_register_error))
         }
 
-        return result
+        return userId
     }
 
     /**
-     * Update the object into database
+     * Update the user password
      *
-     * @param user Entity to save
+     * @param password to update
      */
-    override fun update(user: User): Int? {
-        return null
+    override fun updateUserPassword(password: String): Int? {
+        val result: Int?
+        try {
+            val userId: String = securityPreferences.getStoredString(TaskConstants.KEY.USER_ID)
+            result = userRepository.updateUserPassword(userId, password)
+        } catch (repositoryException: RepositoryException) {
+            throw BusinessException("Ocorreu um erro ao atualizar as informações!")
+        }
+
+        return result
     }
 
     /**
      * Save the object into database
      *
-     * @param id Entity to save
+     * return user information
      */
-    override fun find(id: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun find(): User {
+        val user: User?
+        try {
+            val userId: String = securityPreferences.getStoredString(TaskConstants.KEY.USER_ID)
+            user = userRepository.find(userId.toInt())
+        } catch (repositoryException: RepositoryException) {
+            throw BusinessException(context.getString(R.string.error_finding_user_info))
+        }
+
+        return user!!
     }
 
     /**

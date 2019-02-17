@@ -39,8 +39,32 @@ class UserRepository private constructor(context: Context) : GenericCrudReposito
     }
 
     override fun update(content: User): Int? {
-        // TODO: Implement update logic
-        return 0
+        return null
+    }
+
+    /**
+     * Update the user password
+     *
+     * @param userId The user id to update
+     * @param password to update
+     * return user id
+     */
+    override fun updateUserPassword(userId: String, password: String): Int? {
+        val id: Int?
+
+        try {
+            val database = databaseHelper.writableDatabase
+            val values = ContentValues()
+            values.put(DatabaseUserConstants.COLUMNS.PASSWORD, password)
+            val selection = "${DatabaseUserConstants.COLUMNS.ID} = ?" // Filter user by id: where id = :id
+            val selectionArgs = arrayOf(userId) // Filter arguments
+
+            id = database.update(DatabaseUserConstants.USER.TABLE_NAME, values, selection, selectionArgs)
+        } catch (exception: SQLiteException) {
+            throw RepositoryException("Ocorreu um erro ao inserir usuário no banco")
+        }
+
+        return id
     }
 
     /**

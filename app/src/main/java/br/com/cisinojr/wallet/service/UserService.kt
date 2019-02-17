@@ -12,18 +12,18 @@ interface UserService {
     fun save(user: User): Int?
 
     /**
-     * Update the object into database
+     * Update the user password
      *
-     * @param user Entity to save
+     * @param password to update
      */
-    fun update(user: User): Int?
+    fun updateUserPassword(password: String): Int?
 
     /**
      * Save the object into database
      *
-     * @param id Entity to save
+     * return user information
      */
-    fun find(id: Int)
+    fun find(): User
 
     /**
      * Return a list of users

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
@@ -15,12 +15,19 @@
                 android:orientation="vertical">
 
             <!--SET LOGO IMAGE HERE -->
+            <ImageView
+                    android:layout_width="194dp"
+                    android:layout_height="90dp"
+                    android:src="@drawable/ic_account_circle_black_24dp"
+                    android:id="@+id/imageLogo"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:layout_margin="50dp"/>
 
             <!-- FULLNAME INPUT FIELD -->
             <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="50dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
@@ -30,7 +37,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="text"
-                        android:hint="@string/register_fullname"/>
+                        android:hint="@string/register_fullname"
+                        android:enabled="false"/>
             </android.support.design.widget.TextInputLayout>
 
             <!-- EMAIL FIELD -->
@@ -47,7 +55,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textEmailAddress"
-                        android:hint="@string/register_email"/>
+                        android:hint="@string/register_email"
+                        android:enabled="false"/>
             </android.support.design.widget.TextInputLayout>
 
             <!-- CPF INPUT FIELD -->
@@ -65,7 +74,8 @@
                         android:layout_height="wrap_content"
                         android:inputType="phone"
                         android:maxLength="14"
-                        android:hint="@string/register_cpf"/>
+                        android:hint="@string/register_cpf"
+                        android:enabled="false"/>
             </android.support.design.widget.TextInputLayout>
 
             <!-- PASSWORD INPUT FIELD -->
@@ -106,7 +116,7 @@
 
             <!-- REGISTRATION BUTTON -->
             <Button
-                    android:id="@+id/btnConfirmRegister"
+                    android:id="@+id/btnUpdateUserInformation"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
@@ -114,9 +124,9 @@
                     android:layout_marginTop="20dp"
                     android:background="@drawable/ripple_effect"
                     android:textColor="#fff"
-                    android:text="@string/register_confirm_button"/>
+                    android:text="@string/button_update_user"/>
 
         </LinearLayout>
     </android.support.design.card.MaterialCardView>
 
-</LinearLayout>
+</ScrollView>
