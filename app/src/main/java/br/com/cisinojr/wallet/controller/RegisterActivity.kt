@@ -67,7 +67,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
     private fun register() {
         try {
 
-            if (!editTexPassword.text.toString().equals(editTexConfirmPassword.text.toString(), true)) {
+            if (!editTextPassword.text.toString().equals(editTextConfirmPassword.text.toString(), true)) {
                 throw ValidationException("Senhas não correspondem, favor revisar.")
             }
 
@@ -76,7 +76,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
                 editTextFullname.text.toString(),
                 editTextEmail.text.toString(),
                 editTextCpf.text.toString(),
-                editTexPassword.text.toString()
+                editTextPassword.text.toString()
             )
 
             // Validate user and throws ValidationException if something doesn't match the rules

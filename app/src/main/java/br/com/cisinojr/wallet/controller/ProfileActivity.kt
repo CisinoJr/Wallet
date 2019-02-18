@@ -32,7 +32,6 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
 
         // Load user information
         setUserInformationInForm()
-
     }
 
     /**
@@ -69,11 +68,16 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun updateUserInformation() {
         try {
-            if (!editTexPassword.text.toString().equals(editTexConfirmPassword.text.toString(), true)) {
+
+            if (isPasswordFieldsEmptyOrBlank()) {
+                throw ValidationException("Favor digitar nova senha!")
+            }
+
+            if (!editTextPassword.text.toString().equals(editTextConfirmPassword.text.toString(), true)) {
                 throw ValidationException("Senhas não correspondem, favor revisar.")
             }
 
-            val result: Int? = userService.updateUserPassword(editTexPassword.text.toString())
+            val result: Int? = userService.updateUserPassword(editTextPassword.text.toString())
 
             if (result != null) {
                 Toast.makeText(this, "Senha alterada com sucesso!", Toast.LENGTH_LONG).show()
@@ -84,9 +88,17 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
             }
 
         } catch (validationException: ValidationException) {
-            validationUtil.showSnackFeedback(this, validationException.message, false, editTexPassword)
+            validationUtil.showSnackFeedback(this, validationException.message, false, editTextPassword)
         } catch (businessException: BusinessException) {
-            validationUtil.showSnackFeedback(this, businessException.message, false, editTexPassword)
+            validationUtil.showSnackFeedback(this, businessException.message, false, editTextPassword)
         }
     }
+
+    private fun isPasswordFieldsEmptyOrBlank(): Boolean {
+        return (editTextPassword.text.toString().isBlank()
+                || editTextPassword.text.toString().isEmpty()
+                || editTextConfirmPassword.text.toString().isBlank()
+                || editTextConfirmPassword.text.toString().isEmpty())
+    }
+
 }

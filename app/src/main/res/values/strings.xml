@@ -27,4 +27,8 @@
     <string name="button_update_user">Salvar alterações</string>
     <string name="error_finding_user_info">Erro ao recuperar informações</string>
     <string name="action_logout">Sair</string>
+    <string name="bitcoin_balance">Bitcoin balance</string>
+    <string name="saldo_de_bitcoins">Saldo de Bitcoins</string>
+    <string name="saldo_de_britas">Saldo de Britas</string>
+    <string name="visualizar_extrato">Visualizar Extrato</string>
 </resources>
