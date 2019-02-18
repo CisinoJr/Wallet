@@ -7,6 +7,195 @@
         android:layout_height="match_parent"
         tools:context=".controller.MainActivity">
 
+    <android.support.design.card.MaterialCardView
+            android:id="@+id/money_balance_card"
+            style="@style/Widget.MaterialComponents.CardView"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            app:cardBackgroundColor="@color/colorPrimary"
+            app:cardElevation="4dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp">
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:textColor="#fff"
+                    android:textSize="20sp"
+                    android:text="Saldo"/>
+
+            <ImageView
+                    android:id="@+id/money_balance"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:src="@drawable/ic_balance"
+                    android:layout_marginTop="60dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:contentDescription="@string/bitcoin_balance"/>
+
+            <TextView
+                    android:id="@+id/textViewMoney"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="$ 50.000,90"
+                    android:layout_toRightOf="@+id/money_balance"
+                    android:layout_marginTop="83dp"
+                    android:textSize="20sp"
+                    android:textColor="#fff"
+                    android:layout_alignParentTop="true"/>
+
+            <TextView
+                    android:id="@+id/textViewMoneyBallance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/visualizar_extrato"
+                    android:layout_marginTop="125dp"
+                    android:layout_marginLeft="200dp"
+                    android:textSize="20sp"
+                    android:textColor="#fff"
+                    android:layout_marginRight="10dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="10dp"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/ripple_effect"/>
+        </RelativeLayout>
+    </android.support.design.card.MaterialCardView>
+
+    <android.support.design.card.MaterialCardView
+            android:id="@+id/bitcoin_balance_card"
+            style="@style/Widget.MaterialComponents.CardView"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            app:cardBackgroundColor="@color/colorPrimary"
+            app:cardElevation="4dp"
+            android:layout_marginTop="180dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp">
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:textColor="#fff"
+                    android:textSize="20sp"
+                    android:text="@string/saldo_de_bitcoins"/>
+
+            <ImageView
+                    android:id="@+id/balance"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:src="@drawable/ic_balance"
+                    android:layout_marginTop="60dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:contentDescription="@string/bitcoin_balance"/>
+
+            <TextView
+                    android:id="@+id/textViewBitcoin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="$ 50.000,90"
+                    android:layout_toRightOf="@+id/balance"
+                    android:layout_marginTop="83dp"
+                    android:textSize="20sp"
+                    android:textColor="#fff"
+                    android:layout_alignParentTop="true"/>
+
+            <TextView
+                    android:id="@+id/textViewBitcoinBalance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/visualizar_extrato"
+                    android:layout_marginTop="125dp"
+                    android:textSize="20sp"
+                    android:textColor="#fff"
+                    android:layout_marginRight="10dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="10dp"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/ripple_effect"/>
+        </RelativeLayout>
+
+    </android.support.design.card.MaterialCardView>
+
+    <android.support.design.card.MaterialCardView
+            android:id="@+id/brita_balance_card"
+            style="@style/Widget.MaterialComponents.CardView"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            app:cardBackgroundColor="@color/colorPrimary"
+            app:cardElevation="4dp"
+            android:layout_marginTop="350dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp">
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:textColor="#fff"
+                    android:textSize="20sp"
+                    android:text="@string/saldo_de_britas"/>
+
+            <ImageView
+                    android:id="@+id/brita_balance"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:src="@drawable/ic_balance"
+                    android:layout_marginTop="60dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:contentDescription="@string/bitcoin_balance"/>
+
+            <TextView
+                    android:id="@+id/textViewBrita"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="$ 50.000,90"
+                    android:layout_toRightOf="@+id/brita_balance"
+                    android:layout_marginTop="83dp"
+                    android:textSize="20sp"
+                    android:textColor="#fff"
+                    android:layout_alignParentTop="true"/>
+
+            <TextView
+                    android:id="@+id/textViewBritaBalance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/visualizar_extrato"
+                    android:layout_marginTop="125dp"
+                    android:textSize="20sp"
+                    android:textColor="#fff"
+                    android:layout_marginRight="10dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="10dp"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/ripple_effect"/>
+
+        </RelativeLayout>
+    </android.support.design.card.MaterialCardView>
+
     <!-- BOTTOM NAVIGATION BAR -->
     <android.support.design.bottomappbar.BottomAppBar
             android:id="@+id/bottomAppBar"
@@ -26,5 +215,6 @@
             android:src="@drawable/ic_currency_exchange"
             app:backgroundTint="@color/colorPrimaryDark"
             app:fabSize="normal"
-            app:layout_anchor="@id/bottomAppBar" />
+            app:layout_anchor="@id/bottomAppBar"/>
+
 </android.support.design.widget.CoordinatorLayout>
